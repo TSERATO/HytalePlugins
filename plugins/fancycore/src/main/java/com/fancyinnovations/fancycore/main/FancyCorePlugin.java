@@ -1,6 +1,8 @@
 package com.fancyinnovations.fancycore.main;
 
 import com.fancyinnovations.fancycore.api.FancyCore;
+import com.fancyinnovations.fancycore.api.player.FancyPlayerStorage;
+import com.fancyinnovations.fancycore.player.storage.json.FancyPlayerJsonStorage;
 import de.oliver.fancyanalytics.logger.ExtendedFancyLogger;
 import de.oliver.fancyanalytics.logger.LogLevel;
 import de.oliver.fancyanalytics.logger.appender.Appender;
@@ -17,6 +19,8 @@ public class FancyCorePlugin implements FancyCore {
     private static FancyCorePlugin INSTANCE;
 
     private final ExtendedFancyLogger fancyLogger;
+
+    private final FancyPlayerStorage playerStorage;
 
     public FancyCorePlugin() {
         INSTANCE = this;
@@ -39,6 +43,8 @@ public class FancyCorePlugin implements FancyCore {
                 List.of(consoleAppender, jsonAppender),
                 List.of()
         );
+
+        playerStorage = new FancyPlayerJsonStorage();
     }
 
     public static FancyCorePlugin get() {
@@ -48,5 +54,10 @@ public class FancyCorePlugin implements FancyCore {
     @Override
     public ExtendedFancyLogger getFancyLogger() {
         return fancyLogger;
+    }
+
+    @Override
+    public FancyPlayerStorage getPlayerStorage() {
+        return playerStorage;
     }
 }

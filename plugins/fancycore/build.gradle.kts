@@ -19,8 +19,12 @@ allprojects {
 
 dependencies {
     implementation(project(":plugins:fancycore:fc-api"))
+
+    implementation("de.oliver:JDB:1.0.1")
     implementation("de.oliver.FancyAnalytics:java-sdk:0.0.4")
     implementation("de.oliver.FancyAnalytics:logger:0.0.8")
+
+    compileOnly("com.google.code.gson:gson:2.13.1")
 }
 
 tasks {

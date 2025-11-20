@@ -1,9 +1,11 @@
 package com.fancyinnovations.fancycore.player;
 
+import com.fancyinnovations.fancycore.api.player.FancyPlayer;
+
 import java.awt.*;
 import java.util.UUID;
 
-public class FancyPlayerImpl {
+public class FancyPlayerImpl implements FancyPlayer {
 
     private final UUID uuid;
     private final String username;
@@ -27,6 +29,17 @@ public class FancyPlayerImpl {
         this.firstLoginTime = System.currentTimeMillis();
         this.playTime = 0L;
         this.isDirty = true;
+    }
+
+    public FancyPlayerImpl(UUID uuid, String username, String nickname, Color chatColor, double balance, long firstLoginTime, long playTime) {
+        this.chatColor = chatColor;
+        this.uuid = uuid;
+        this.username = username;
+        this.nickname = nickname;
+        this.balance = balance;
+        this.firstLoginTime = firstLoginTime;
+        this.playTime = playTime;
+        this.isDirty = false;
     }
 
     public UUID getUuid() {
