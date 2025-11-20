@@ -21,6 +21,7 @@ dependencies {
     implementation(project(":plugins:fancycore:fc-api"))
 
     implementation("de.oliver:JDB:1.0.2")
+    implementation("de.oliver:config:1.0.0")
     implementation("de.oliver.FancyAnalytics:java-sdk:0.0.4")
     implementation("de.oliver.FancyAnalytics:logger:0.0.8")
 

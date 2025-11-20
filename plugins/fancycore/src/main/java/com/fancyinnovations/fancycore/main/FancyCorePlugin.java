@@ -1,8 +1,10 @@
 package com.fancyinnovations.fancycore.main;
 
 import com.fancyinnovations.fancycore.api.FancyCore;
+import com.fancyinnovations.fancycore.api.FancyCoreConfig;
 import com.fancyinnovations.fancycore.api.player.FancyPlayerService;
 import com.fancyinnovations.fancycore.api.player.FancyPlayerStorage;
+import com.fancyinnovations.fancycore.config.FancyCoreConfigImpl;
 import com.fancyinnovations.fancycore.metrics.PluginMetrics;
 import com.fancyinnovations.fancycore.player.service.CleanUpPlayerCacheRunnable;
 import com.fancyinnovations.fancycore.player.service.FancyPlayerServiceImpl;
@@ -27,6 +29,8 @@ public class FancyCorePlugin implements FancyCore {
 
     private final ExtendedFancyLogger fancyLogger;
     private final ScheduledExecutorService threadPool;
+
+    private final FancyCoreConfig fancyCoreConfig;
 
     private final FancyPlayerStorage playerStorage;
     private final FancyPlayerService playerService;
@@ -63,6 +67,8 @@ public class FancyCorePlugin implements FancyCore {
             return thread;
         });
 
+        fancyCoreConfig = new FancyCoreConfigImpl();
+
         pluginMetrics = new PluginMetrics();
 
         playerStorage = new FancyPlayerJsonStorage();
@@ -78,9 +84,23 @@ public class FancyCorePlugin implements FancyCore {
     public void onEnable() {
         fancyLogger.info("FancyCore is enabling...");
 
+        // load config
+        ((FancyCoreConfigImpl) fancyCoreConfig).init();
+
+        // set log level from config
+        LogLevel logLevel;
+        try {
+            logLevel = LogLevel.valueOf(fancyCoreConfig.getLogLevel());
+        } catch (IllegalArgumentException e) {
+            logLevel = LogLevel.INFO;
+        }
+        fancyLogger.setCurrentLevel(logLevel);
+
+        // start player schedulers
         savePlayersRunnable.schedule();
         cleanUpPlayerCacheRunnable.schedule();
 
+        // register metrics
         pluginMetrics.register();
 
         fancyLogger.info("FancyCore has been enabled.");
@@ -99,6 +119,11 @@ public class FancyCorePlugin implements FancyCore {
     @Override
     public ExtendedFancyLogger getFancyLogger() {
         return fancyLogger;
+    }
+
+    @Override
+    public FancyCoreConfig getConfig() {
+        return fancyCoreConfig;
     }
 
     @Override

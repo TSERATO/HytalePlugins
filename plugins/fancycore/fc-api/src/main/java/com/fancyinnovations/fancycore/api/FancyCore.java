@@ -9,6 +9,9 @@ import java.util.concurrent.ScheduledExecutorService;
 public interface FancyCore {
 
     ExtendedFancyLogger getFancyLogger();
+
+    FancyCoreConfig getConfig();
+
     ScheduledExecutorService getThreadPool();
 
     FancyPlayerStorage getPlayerStorage();
