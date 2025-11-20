@@ -6,7 +6,6 @@ import java.util.UUID;
 public interface FancyPlayer {
 
     UUID getUUID();
-
     String getUsername();
 
     String getNickname();

@@ -30,6 +30,8 @@ public class FancyCorePlugin implements FancyCore {
 
     private final FancyPlayerStorage playerStorage;
     private final FancyPlayerService playerService;
+    private final SavePlayersRunnable savePlayersRunnable;
+    private final CleanUpPlayerCacheRunnable cleanUpPlayerCacheRunnable;
 
     private final PluginMetrics pluginMetrics;
 
@@ -65,6 +67,8 @@ public class FancyCorePlugin implements FancyCore {
 
         playerStorage = new FancyPlayerJsonStorage();
         playerService = new FancyPlayerServiceImpl();
+        savePlayersRunnable = new SavePlayersRunnable();
+        cleanUpPlayerCacheRunnable = new CleanUpPlayerCacheRunnable();
     }
 
     public static FancyCorePlugin get() {
@@ -74,8 +78,8 @@ public class FancyCorePlugin implements FancyCore {
     public void onEnable() {
         fancyLogger.info("FancyCore is enabling...");
 
-        new SavePlayersRunnable().schedule();
-        new CleanUpPlayerCacheRunnable().schedule();
+        savePlayersRunnable.schedule();
+        cleanUpPlayerCacheRunnable.schedule();
 
         pluginMetrics.register();
 
@@ -86,6 +90,8 @@ public class FancyCorePlugin implements FancyCore {
         fancyLogger.info("FancyCore is disabling...");
 
         threadPool.shutdown();
+
+        savePlayersRunnable.run();
 
         fancyLogger.info("FancyCore has been disabled.");
     }

@@ -9,18 +9,10 @@ import java.util.concurrent.TimeUnit;
 public class CleanUpPlayerCacheRunnable implements Runnable{
 
     private final FancyPlayerServiceImpl service;
+    private ScheduledFuture<?> schedule;
 
     public CleanUpPlayerCacheRunnable() {
         this.service = (FancyPlayerServiceImpl) FancyCorePlugin.get().getPlayerService();
-    }
-
-    public ScheduledFuture<?> schedule() {
-        return FancyCorePlugin.get().getThreadPool().scheduleWithFixedDelay(
-                this,
-                10,
-                30,
-                TimeUnit.MINUTES
-        );
     }
 
     @Override
@@ -31,5 +23,24 @@ public class CleanUpPlayerCacheRunnable implements Runnable{
 //                service.removePlayerFromCache(fp.getUUID());
 //            }
         }
+    }
+
+    public ScheduledFuture<?> schedule() {
+        if (this.schedule != null && !this.schedule.isCancelled()) {
+            throw new IllegalStateException("CleanUpPlayerCacheRunnable is already scheduled");
+        }
+
+        this.schedule = FancyCorePlugin.get().getThreadPool().scheduleWithFixedDelay(
+                this,
+                10,
+                30,
+                TimeUnit.MINUTES
+        );
+
+        return this.schedule;
+    }
+
+    public ScheduledFuture<?> getSchedule() {
+        return schedule;
     }
 }

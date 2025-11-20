@@ -15,19 +15,11 @@ public class SavePlayersRunnable implements Runnable{
 
     private final FancyPlayerService service;
     private final FancyPlayerStorage storage;
+    private ScheduledFuture<?> schedule;
 
     public SavePlayersRunnable() {
         this.service = FancyCorePlugin.get().getPlayerService();
         this.storage = FancyCorePlugin.get().getPlayerStorage();
-    }
-
-    public ScheduledFuture<?> schedule() {
-        return FancyCorePlugin.get().getThreadPool().scheduleWithFixedDelay(
-                this,
-                5L * 60L,
-                60L * 60L,
-                TimeUnit.SECONDS
-        );
     }
 
     @Override
@@ -52,5 +44,24 @@ public class SavePlayersRunnable implements Runnable{
         } catch (Exception e) {
             FancyCorePlugin.get().getFancyLogger().warn("Failed to save player data", ThrowableProperty.of(e));
         }
+    }
+
+    public ScheduledFuture<?> schedule() {
+        if (this.schedule != null && !this.schedule.isCancelled()) {
+            throw new IllegalStateException("SavePlayersRunnable is already scheduled");
+        }
+
+        this.schedule = FancyCorePlugin.get().getThreadPool().scheduleWithFixedDelay(
+                this,
+                5L * 60L,
+                60L * 60L,
+                TimeUnit.SECONDS
+        );
+
+        return this.schedule;
+    }
+
+    public ScheduledFuture<?> getSchedule() {
+        return schedule;
     }
 }
