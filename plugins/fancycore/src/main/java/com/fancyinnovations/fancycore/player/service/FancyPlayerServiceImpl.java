@@ -78,4 +78,8 @@ public class FancyPlayerServiceImpl implements FancyPlayerService {
         return found;
     }
 
+    public void removePlayerFromCache(UUID uuid) {
+        cache.remove(uuid);
+    }
+
 }

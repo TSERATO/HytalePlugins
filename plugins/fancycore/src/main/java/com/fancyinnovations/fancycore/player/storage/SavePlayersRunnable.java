@@ -1,0 +1,56 @@
+package com.fancyinnovations.fancycore.player.storage;
+
+import com.fancyinnovations.fancycore.api.player.FancyPlayer;
+import com.fancyinnovations.fancycore.api.player.FancyPlayerService;
+import com.fancyinnovations.fancycore.api.player.FancyPlayerStorage;
+import com.fancyinnovations.fancycore.main.FancyCorePlugin;
+import de.oliver.fancyanalytics.logger.properties.NumberProperty;
+import de.oliver.fancyanalytics.logger.properties.ThrowableProperty;
+
+import java.util.List;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
+public class SavePlayersRunnable implements Runnable{
+
+    private final FancyPlayerService service;
+    private final FancyPlayerStorage storage;
+
+    public SavePlayersRunnable() {
+        this.service = FancyCorePlugin.get().getPlayerService();
+        this.storage = FancyCorePlugin.get().getPlayerStorage();
+    }
+
+    public ScheduledFuture<?> schedule() {
+        return FancyCorePlugin.get().getThreadPool().scheduleWithFixedDelay(
+                this,
+                5L * 60L,
+                60L * 60L,
+                TimeUnit.SECONDS
+        );
+    }
+
+    @Override
+    public void run() {
+        try {
+            long start = System.currentTimeMillis();
+
+            List<FancyPlayer> all = service.getAll();
+            for (FancyPlayer fp : all) {
+                if (fp.isDirty()) {
+                    storage.savePlayer(fp);
+                    fp.setDirty(false);
+                }
+            }
+
+            long duration = System.currentTimeMillis() - start;
+            FancyCorePlugin.get().getFancyLogger().info(
+                    "Saved player data",
+                    NumberProperty.of("count", all.size()),
+                    NumberProperty.of("duration_ms", duration)
+            );
+        } catch (Exception e) {
+            FancyCorePlugin.get().getFancyLogger().warn("Failed to save player data", ThrowableProperty.of(e));
+        }
+    }
+}

@@ -4,7 +4,9 @@ import com.fancyinnovations.fancycore.api.FancyCore;
 import com.fancyinnovations.fancycore.api.player.FancyPlayerService;
 import com.fancyinnovations.fancycore.api.player.FancyPlayerStorage;
 import com.fancyinnovations.fancycore.metrics.PluginMetrics;
+import com.fancyinnovations.fancycore.player.service.CleanUpPlayerCacheRunnable;
 import com.fancyinnovations.fancycore.player.service.FancyPlayerServiceImpl;
+import com.fancyinnovations.fancycore.player.storage.SavePlayersRunnable;
 import com.fancyinnovations.fancycore.player.storage.json.FancyPlayerJsonStorage;
 import de.oliver.fancyanalytics.logger.ExtendedFancyLogger;
 import de.oliver.fancyanalytics.logger.LogLevel;
@@ -25,10 +27,11 @@ public class FancyCorePlugin implements FancyCore {
 
     private final ExtendedFancyLogger fancyLogger;
     private final ScheduledExecutorService threadPool;
-    private final PluginMetrics pluginMetrics;
 
     private final FancyPlayerStorage playerStorage;
     private final FancyPlayerService playerService;
+
+    private final PluginMetrics pluginMetrics;
 
     public FancyCorePlugin() {
         INSTANCE = this;
@@ -70,6 +73,9 @@ public class FancyCorePlugin implements FancyCore {
 
     public void onEnable() {
         fancyLogger.info("FancyCore is enabling...");
+
+        new SavePlayersRunnable().schedule();
+        new CleanUpPlayerCacheRunnable().schedule();
 
         pluginMetrics.register();
 
