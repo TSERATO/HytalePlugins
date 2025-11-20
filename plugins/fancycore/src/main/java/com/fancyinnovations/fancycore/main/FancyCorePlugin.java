@@ -1,8 +1,10 @@
 package com.fancyinnovations.fancycore.main;
 
 import com.fancyinnovations.fancycore.api.FancyCore;
+import com.fancyinnovations.fancycore.api.player.FancyPlayerRegistry;
 import com.fancyinnovations.fancycore.api.player.FancyPlayerStorage;
 import com.fancyinnovations.fancycore.metrics.PluginMetrics;
+import com.fancyinnovations.fancycore.player.registry.FancyPlayerRegistryImpl;
 import com.fancyinnovations.fancycore.player.storage.json.FancyPlayerJsonStorage;
 import de.oliver.fancyanalytics.logger.ExtendedFancyLogger;
 import de.oliver.fancyanalytics.logger.LogLevel;
@@ -23,6 +25,7 @@ public class FancyCorePlugin implements FancyCore {
     private final PluginMetrics pluginMetrics;
 
     private final FancyPlayerStorage playerStorage;
+    private final FancyPlayerRegistry playerRegistry;
 
     public FancyCorePlugin() {
         INSTANCE = this;
@@ -49,6 +52,7 @@ public class FancyCorePlugin implements FancyCore {
         pluginMetrics = new PluginMetrics();
 
         playerStorage = new FancyPlayerJsonStorage();
+        playerRegistry = new FancyPlayerRegistryImpl();
     }
 
     public static FancyCorePlugin get() {
@@ -77,5 +81,10 @@ public class FancyCorePlugin implements FancyCore {
     @Override
     public FancyPlayerStorage getPlayerStorage() {
         return playerStorage;
+    }
+
+    @Override
+    public FancyPlayerRegistry getPlayerRegistry() {
+        return playerRegistry;
     }
 }
