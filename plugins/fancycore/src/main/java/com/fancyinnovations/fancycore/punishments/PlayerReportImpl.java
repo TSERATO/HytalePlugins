@@ -55,8 +55,9 @@ public class PlayerReportImpl implements PlayerReport {
         return resolved;
     }
 
-    public void setResolved(boolean resolved) {
-        this.resolved = resolved;
+    public void resolve() {
+        this.resolved = true;
+        this.resolvedAt = System.currentTimeMillis();
     }
 
     public long resolvedAt() {
