@@ -2,11 +2,13 @@ package com.fancyinnovations.fancycore.main;
 
 import com.fancyinnovations.fancycore.api.FancyCore;
 import com.fancyinnovations.fancycore.api.FancyCoreConfig;
+import com.fancyinnovations.fancycore.api.events.EventService;
 import com.fancyinnovations.fancycore.api.player.FancyPlayerService;
 import com.fancyinnovations.fancycore.api.player.FancyPlayerStorage;
 import com.fancyinnovations.fancycore.api.punishments.PunishmentService;
 import com.fancyinnovations.fancycore.api.punishments.PunishmentStorage;
 import com.fancyinnovations.fancycore.config.FancyCoreConfigImpl;
+import com.fancyinnovations.fancycore.events.EventServiceImpl;
 import com.fancyinnovations.fancycore.metrics.PluginMetrics;
 import com.fancyinnovations.fancycore.player.service.CleanUpPlayerCacheRunnable;
 import com.fancyinnovations.fancycore.player.service.FancyPlayerServiceImpl;
@@ -38,6 +40,8 @@ public class FancyCorePlugin implements FancyCore {
 
     private final PluginMetrics pluginMetrics;
 
+    private final EventService eventService;
+
     private final FancyPlayerStorage playerStorage;
     private final FancyPlayerService playerService;
     private final SavePlayersRunnable savePlayersRunnable;
@@ -48,6 +52,7 @@ public class FancyCorePlugin implements FancyCore {
 
     public FancyCorePlugin() {
         INSTANCE = this;
+        FancyCore.InstanceHolder.setInstance(INSTANCE);
 
         Appender consoleAppender = new ConsoleAppender("[{loggerName}] ({threadName}) {logLevel}: {message}");
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis()));
@@ -77,6 +82,8 @@ public class FancyCorePlugin implements FancyCore {
         fancyCoreConfig = new FancyCoreConfigImpl();
 
         pluginMetrics = new PluginMetrics();
+
+        eventService = new EventServiceImpl();
 
         playerStorage = new FancyPlayerJsonStorage();
         playerService = new FancyPlayerServiceImpl();
@@ -139,6 +146,11 @@ public class FancyCorePlugin implements FancyCore {
     @Override
     public ScheduledExecutorService getThreadPool() {
         return threadPool;
+    }
+
+    @Override
+    public EventService getEventService() {
+        return eventService;
     }
 
     @Override

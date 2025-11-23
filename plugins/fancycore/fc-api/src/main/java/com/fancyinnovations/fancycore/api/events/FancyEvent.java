@@ -1,5 +1,7 @@
 package com.fancyinnovations.fancycore.api.events;
 
+import com.fancyinnovations.fancycore.api.FancyCore;
+
 public abstract class FancyEvent {
 
     private final long firedAt;
@@ -18,8 +20,8 @@ public abstract class FancyEvent {
         this.cancelled = false;
     }
 
-    public void fire()  {
-        // TODO: Implement event firing logic
+    public boolean fire()  {
+        return FancyCore.get().getEventService().fireEvent(this);
     }
 
     public boolean isCancellable() {
