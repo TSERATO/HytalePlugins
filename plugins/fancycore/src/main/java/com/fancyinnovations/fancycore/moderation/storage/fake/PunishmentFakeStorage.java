@@ -1,8 +1,8 @@
-package com.fancyinnovations.fancycore.punishments.storage.fake;
+package com.fancyinnovations.fancycore.moderation.storage.fake;
 
-import com.fancyinnovations.fancycore.api.punishments.PlayerReport;
-import com.fancyinnovations.fancycore.api.punishments.Punishment;
-import com.fancyinnovations.fancycore.api.punishments.PunishmentStorage;
+import com.fancyinnovations.fancycore.api.moderation.PlayerReport;
+import com.fancyinnovations.fancycore.api.moderation.Punishment;
+import com.fancyinnovations.fancycore.api.moderation.PunishmentStorage;
 
 import java.util.ArrayList;
 import java.util.List;

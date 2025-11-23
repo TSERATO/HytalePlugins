@@ -1,7 +1,7 @@
 package com.fancyinnovations.fancycore.api.events.player;
 
+import com.fancyinnovations.fancycore.api.moderation.Punishment;
 import com.fancyinnovations.fancycore.api.player.FancyPlayer;
-import com.fancyinnovations.fancycore.api.punishments.Punishment;
 
 /**
  * Event fired when a player receives a punishment.

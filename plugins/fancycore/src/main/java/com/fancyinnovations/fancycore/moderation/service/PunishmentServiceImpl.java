@@ -1,15 +1,15 @@
-package com.fancyinnovations.fancycore.punishments.service;
+package com.fancyinnovations.fancycore.moderation.service;
 
 import com.fancyinnovations.fancycore.api.events.player.PlayerPunishedEvent;
 import com.fancyinnovations.fancycore.api.events.player.PlayerReportedEvent;
+import com.fancyinnovations.fancycore.api.moderation.Punishment;
+import com.fancyinnovations.fancycore.api.moderation.PunishmentService;
+import com.fancyinnovations.fancycore.api.moderation.PunishmentStorage;
+import com.fancyinnovations.fancycore.api.moderation.PunishmentType;
 import com.fancyinnovations.fancycore.api.player.FancyPlayer;
-import com.fancyinnovations.fancycore.api.punishments.Punishment;
-import com.fancyinnovations.fancycore.api.punishments.PunishmentService;
-import com.fancyinnovations.fancycore.api.punishments.PunishmentStorage;
-import com.fancyinnovations.fancycore.api.punishments.PunishmentType;
 import com.fancyinnovations.fancycore.main.FancyCorePlugin;
-import com.fancyinnovations.fancycore.punishments.PlayerReportImpl;
-import com.fancyinnovations.fancycore.punishments.PunishmentImpl;
+import com.fancyinnovations.fancycore.moderation.PlayerReportImpl;
+import com.fancyinnovations.fancycore.moderation.PunishmentImpl;
 import com.fancyinnovations.fancycore.translations.TranslationService;
 
 import java.util.List;

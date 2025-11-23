@@ -1,4 +1,4 @@
-package com.fancyinnovations.fancycore.api.punishments;
+package com.fancyinnovations.fancycore.api.moderation;
 
 import org.jetbrains.annotations.ApiStatus;
 

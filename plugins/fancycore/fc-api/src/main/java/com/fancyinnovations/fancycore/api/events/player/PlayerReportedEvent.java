@@ -1,7 +1,7 @@
 package com.fancyinnovations.fancycore.api.events.player;
 
+import com.fancyinnovations.fancycore.api.moderation.PlayerReport;
 import com.fancyinnovations.fancycore.api.player.FancyPlayer;
-import com.fancyinnovations.fancycore.api.punishments.PlayerReport;
 
 /**
  * Event fired when a player is reported by another player.

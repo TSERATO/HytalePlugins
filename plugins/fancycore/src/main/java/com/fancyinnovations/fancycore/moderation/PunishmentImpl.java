@@ -1,7 +1,7 @@
-package com.fancyinnovations.fancycore.punishments;
+package com.fancyinnovations.fancycore.moderation;
 
-import com.fancyinnovations.fancycore.api.punishments.Punishment;
-import com.fancyinnovations.fancycore.api.punishments.PunishmentType;
+import com.fancyinnovations.fancycore.api.moderation.Punishment;
+import com.fancyinnovations.fancycore.api.moderation.PunishmentType;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.UUID;

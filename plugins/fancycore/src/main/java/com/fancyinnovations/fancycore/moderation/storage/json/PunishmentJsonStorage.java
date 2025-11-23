@@ -1,8 +1,8 @@
-package com.fancyinnovations.fancycore.punishments.storage.json;
+package com.fancyinnovations.fancycore.moderation.storage.json;
 
-import com.fancyinnovations.fancycore.api.punishments.PlayerReport;
-import com.fancyinnovations.fancycore.api.punishments.Punishment;
-import com.fancyinnovations.fancycore.api.punishments.PunishmentStorage;
+import com.fancyinnovations.fancycore.api.moderation.PlayerReport;
+import com.fancyinnovations.fancycore.api.moderation.Punishment;
+import com.fancyinnovations.fancycore.api.moderation.PunishmentStorage;
 import com.fancyinnovations.fancycore.main.FancyCorePlugin;
 import de.oliver.fancyanalytics.logger.properties.StringProperty;
 import de.oliver.fancyanalytics.logger.properties.ThrowableProperty;

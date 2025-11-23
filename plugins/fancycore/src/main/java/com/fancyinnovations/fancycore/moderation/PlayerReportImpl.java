@@ -1,7 +1,7 @@
-package com.fancyinnovations.fancycore.punishments;
+package com.fancyinnovations.fancycore.moderation;
 
+import com.fancyinnovations.fancycore.api.moderation.PlayerReport;
 import com.fancyinnovations.fancycore.api.player.FancyPlayer;
-import com.fancyinnovations.fancycore.api.punishments.PlayerReport;
 
 import java.util.UUID;
 

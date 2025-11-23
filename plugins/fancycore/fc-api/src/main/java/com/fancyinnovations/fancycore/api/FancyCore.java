@@ -1,10 +1,10 @@
 package com.fancyinnovations.fancycore.api;
 
 import com.fancyinnovations.fancycore.api.events.service.EventService;
+import com.fancyinnovations.fancycore.api.moderation.PunishmentService;
+import com.fancyinnovations.fancycore.api.moderation.PunishmentStorage;
 import com.fancyinnovations.fancycore.api.player.FancyPlayerService;
 import com.fancyinnovations.fancycore.api.player.FancyPlayerStorage;
-import com.fancyinnovations.fancycore.api.punishments.PunishmentService;
-import com.fancyinnovations.fancycore.api.punishments.PunishmentStorage;
 import de.oliver.fancyanalytics.logger.ExtendedFancyLogger;
 import org.jetbrains.annotations.ApiStatus;
 
