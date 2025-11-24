@@ -4,7 +4,6 @@ import com.fancyinnovations.fancycore.api.permissions.Permission;
 import com.fancyinnovations.fancycore.api.player.FakeHytalePlayer;
 import com.fancyinnovations.fancycore.api.player.FancyPlayer;
 import com.fancyinnovations.fancycore.api.player.FancyPlayerData;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
@@ -38,8 +37,13 @@ public class FancyPlayerImpl implements FancyPlayer {
     }
 
     @Override
-    public void setPlayer(@NotNull FakeHytalePlayer player) {
+    public void setPlayer(FakeHytalePlayer player) {
         this.player = player;
+
+        if (player == null) {
+            return;
+        }
+
         this.data.setUUID(player.getUUID());
         this.data.setUsername(data.getUsername());
     }

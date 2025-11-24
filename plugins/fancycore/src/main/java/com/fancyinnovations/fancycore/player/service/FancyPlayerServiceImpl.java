@@ -8,21 +8,18 @@ import com.fancyinnovations.fancycore.main.FancyCorePlugin;
 import com.fancyinnovations.fancycore.player.FancyPlayerImpl;
 import org.jetbrains.annotations.ApiStatus;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class FancyPlayerServiceImpl implements FancyPlayerService {
 
     private final Map<UUID, FancyPlayer> cache;
-    private final List<FancyPlayer> onlinePlayers;
+    private final Set<FancyPlayer> onlinePlayers;
     private final FancyPlayerStorage storage;
 
     public FancyPlayerServiceImpl() {
         this.cache = new ConcurrentHashMap<>();
-        this.onlinePlayers = new ArrayList<>();
+        this.onlinePlayers = new HashSet<>();
         this.storage = FancyCorePlugin.get().getPlayerStorage();
     }
 
