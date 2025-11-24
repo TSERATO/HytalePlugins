@@ -116,22 +116,28 @@ public class FancyPlayerDataImpl implements FancyPlayerData {
 
     @Override
     public List<UUID> getGroups() {
-        return List.of();
+        return groups;
     }
 
     @Override
     public void setGroups(List<UUID> groups) {
-
+        this.groups.clear();
+        this.groups.addAll(groups);
     }
 
     @Override
     public void addGroup(UUID group) {
-
+        if (!this.groups.contains(group)) {
+            this.groups.add(group);
+            this.isDirty = true;
+        }
     }
 
     @Override
     public void removeGroup(UUID group) {
-
+        if (this.groups.remove(group)) {
+            this.isDirty = true;
+        }
     }
 
     @Override
