@@ -1,5 +1,6 @@
 package com.fancyinnovations.fancycore.api.events.service;
 
+import com.fancyinnovations.fancycore.api.FancyCore;
 import com.fancyinnovations.fancycore.api.events.FancyEvent;
 import org.jetbrains.annotations.ApiStatus;
 
@@ -7,6 +8,10 @@ import org.jetbrains.annotations.ApiStatus;
  * Service interface for managing and firing events within the FancyCore system.
  */
 public interface EventService {
+
+    static EventService get() {
+        return FancyCore.get().getEventService();
+    }
 
     /**
      * Fires an event to all registered listeners.

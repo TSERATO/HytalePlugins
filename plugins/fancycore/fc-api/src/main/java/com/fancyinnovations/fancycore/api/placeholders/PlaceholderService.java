@@ -1,9 +1,15 @@
 package com.fancyinnovations.fancycore.api.placeholders;
 
+import com.fancyinnovations.fancycore.api.FancyCore;
+
 /**
  * Service for managing and parsing placeholders within strings.
  */
 public interface PlaceholderService {
+
+    static PlaceholderService get() {
+        return FancyCore.get().getPlaceholderService();
+    }
 
     /**
      * Registers a new placeholder provider.

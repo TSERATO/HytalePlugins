@@ -1,10 +1,15 @@
 package com.fancyinnovations.fancycore.api.moderation;
 
+import com.fancyinnovations.fancycore.api.FancyCore;
 import com.fancyinnovations.fancycore.api.player.FancyPlayer;
 
 import java.util.List;
 
 public interface PunishmentService {
+
+    static PunishmentService get() {
+        return FancyCore.get().getPunishmentService();
+    }
 
     Punishment warnPlayer(FancyPlayer player, FancyPlayer staff, String reason);
 

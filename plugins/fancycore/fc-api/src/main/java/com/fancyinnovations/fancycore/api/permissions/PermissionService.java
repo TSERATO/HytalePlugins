@@ -7,6 +7,11 @@ import java.util.UUID;
 
 public interface PermissionService {
 
+    // TODO: enable when integrated with FancyCore
+//    static PermissionService get() {
+//        return FancyCore.get().getPermissionService();
+//    }
+
     List<Group> getGroups();
     Group getGroup(String name);
     void addGroup(Group group);
