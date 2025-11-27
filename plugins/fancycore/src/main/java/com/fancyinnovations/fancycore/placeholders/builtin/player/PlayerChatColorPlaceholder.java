@@ -10,7 +10,8 @@ public class PlayerChatColorPlaceholder implements PlaceholderProvider {
 
     public static final PlayerChatColorPlaceholder INSTANCE = new PlayerChatColorPlaceholder();
 
-    private PlayerChatColorPlaceholder() {}
+    private PlayerChatColorPlaceholder() {
+    }
 
     @Override
     public String getName() {

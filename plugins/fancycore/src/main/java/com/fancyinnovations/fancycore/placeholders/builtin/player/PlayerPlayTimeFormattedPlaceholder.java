@@ -10,7 +10,8 @@ public class PlayerPlayTimeFormattedPlaceholder implements PlaceholderProvider {
 
     public static final PlayerPlayTimeFormattedPlaceholder INSTANCE = new PlayerPlayTimeFormattedPlaceholder();
 
-    private PlayerPlayTimeFormattedPlaceholder() {}
+    private PlayerPlayTimeFormattedPlaceholder() {
+    }
 
     @Override
     public String getName() {

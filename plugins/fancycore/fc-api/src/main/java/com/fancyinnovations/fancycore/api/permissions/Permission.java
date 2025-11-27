@@ -5,6 +5,7 @@ public interface Permission {
     String getPermission();
 
     boolean isEnabled();
+
     void setEnabled(boolean enabled);
 
 }

@@ -9,7 +9,8 @@ public class PlayerBalanceRawPlaceholder implements PlaceholderProvider {
 
     public static final PlayerBalanceRawPlaceholder INSTANCE = new PlayerBalanceRawPlaceholder();
 
-    private PlayerBalanceRawPlaceholder() {}
+    private PlayerBalanceRawPlaceholder() {
+    }
 
     @Override
     public String getName() {

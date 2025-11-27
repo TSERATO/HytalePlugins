@@ -7,13 +7,13 @@ import com.google.gson.annotations.SerializedName;
 import java.util.UUID;
 
 public record PunishmentImpl(
-    UUID id,
-    UUID player,
-    PunishmentType type,
-    String reason,
-    @SerializedName("issued_at") long issuedAt,
-    @SerializedName("issued_by") UUID issuedBy,
-    @SerializedName("expires_at") long expiresAt
+        UUID id,
+        UUID player,
+        PunishmentType type,
+        String reason,
+        @SerializedName("issued_at") long issuedAt,
+        @SerializedName("issued_by") UUID issuedBy,
+        @SerializedName("expires_at") long expiresAt
 ) implements Punishment {
 
     public long remainingDuration() {

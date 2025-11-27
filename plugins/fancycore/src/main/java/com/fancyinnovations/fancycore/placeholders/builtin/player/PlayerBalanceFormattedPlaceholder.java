@@ -10,7 +10,8 @@ public class PlayerBalanceFormattedPlaceholder implements PlaceholderProvider {
 
     public static final PlayerBalanceFormattedPlaceholder INSTANCE = new PlayerBalanceFormattedPlaceholder();
 
-    private PlayerBalanceFormattedPlaceholder() {}
+    private PlayerBalanceFormattedPlaceholder() {
+    }
 
     @Override
     public String getName() {

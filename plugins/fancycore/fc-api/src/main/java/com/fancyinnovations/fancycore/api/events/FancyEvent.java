@@ -28,7 +28,7 @@ public abstract class FancyEvent {
      *
      * @return true if the event was not cancelled, false otherwise
      */
-    public boolean fire()  {
+    public boolean fire() {
         return FancyCore.get().getEventService().fireEvent(this);
     }
 

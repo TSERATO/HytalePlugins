@@ -29,10 +29,12 @@ public interface FancyCore {
 
     @ApiStatus.Internal
     FancyPlayerStorage getPlayerStorage();
+
     FancyPlayerService getPlayerService();
 
     @ApiStatus.Internal
     PunishmentStorage getPunishmentStorage();
+
     PunishmentService getPunishmentService();
 
 

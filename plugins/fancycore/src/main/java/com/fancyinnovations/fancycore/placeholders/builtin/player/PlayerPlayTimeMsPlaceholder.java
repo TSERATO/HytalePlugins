@@ -9,7 +9,8 @@ public class PlayerPlayTimeMsPlaceholder implements PlaceholderProvider {
 
     public static final PlayerPlayTimeMsPlaceholder INSTANCE = new PlayerPlayTimeMsPlaceholder();
 
-    private PlayerPlayTimeMsPlaceholder() {}
+    private PlayerPlayTimeMsPlaceholder() {
+    }
 
     @Override
     public String getName() {

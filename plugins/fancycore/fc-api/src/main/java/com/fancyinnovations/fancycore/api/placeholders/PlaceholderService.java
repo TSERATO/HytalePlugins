@@ -15,12 +15,14 @@ public interface PlaceholderService {
 
     /**
      * Registers a new placeholder provider.
+     *
      * @param provider The placeholder provider to register.
      */
     void registerProvider(PlaceholderProvider provider);
 
     /**
      * Unregisters an existing placeholder provider.
+     *
      * @param provider The placeholder provider to unregister.
      */
     void unregisterProvider(PlaceholderProvider provider);

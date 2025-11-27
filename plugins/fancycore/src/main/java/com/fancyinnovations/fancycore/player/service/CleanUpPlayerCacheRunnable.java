@@ -6,7 +6,7 @@ import com.fancyinnovations.fancycore.main.FancyCorePlugin;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-public class CleanUpPlayerCacheRunnable implements Runnable{
+public class CleanUpPlayerCacheRunnable implements Runnable {
 
     private final FancyPlayerServiceImpl service;
     private ScheduledFuture<?> schedule;

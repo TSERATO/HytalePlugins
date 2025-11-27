@@ -9,7 +9,8 @@ public class PlayerUuidPlaceholder implements PlaceholderProvider {
 
     public static final PlayerUuidPlaceholder INSTANCE = new PlayerUuidPlaceholder();
 
-    private PlayerUuidPlaceholder() {}
+    private PlayerUuidPlaceholder() {
+    }
 
     @Override
     public String getName() {

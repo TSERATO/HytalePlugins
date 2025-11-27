@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-public class SavePlayersRunnable implements Runnable{
+public class SavePlayersRunnable implements Runnable {
 
     private final FancyPlayerServiceImpl service;
     private final FancyPlayerStorage storage;

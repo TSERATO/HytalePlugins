@@ -7,7 +7,7 @@ public class TimeUtils {
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public static String formatTime (long millis) {
+    public static String formatTime(long millis) {
         long seconds = millis / 1000;
         long minutes = seconds / 60;
         long hours = minutes / 60;
@@ -32,7 +32,7 @@ public class TimeUtils {
         return formattedTime.toString().trim();
     }
 
-    public static String formatDate (long timestamp) {
+    public static String formatDate(long timestamp) {
         Date date = new Date(timestamp);
         return DATE_FORMAT.format(date);
     }

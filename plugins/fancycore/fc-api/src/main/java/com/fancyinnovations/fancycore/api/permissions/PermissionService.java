@@ -13,11 +13,16 @@ public interface PermissionService {
 //    }
 
     List<Group> getGroups();
+
     Group getGroup(String name);
+
     void addGroup(Group group);
+
     void removeGroup(String name);
 
     boolean hasPermission(FancyPlayer player, String permission);
+
     boolean hasPermission(UUID uuid, String permission);
+
     boolean hasPermission(String username, String permission);
 }

@@ -9,7 +9,8 @@ public class PlayerNickNamePlaceholder implements PlaceholderProvider {
 
     public static final PlayerNickNamePlaceholder INSTANCE = new PlayerNickNamePlaceholder();
 
-    private PlayerNickNamePlaceholder() {}
+    private PlayerNickNamePlaceholder() {
+    }
 
     @Override
     public String getName() {

@@ -10,7 +10,7 @@ public class PlayerModifiedEvent extends PlayerEvent {
 
     private final ModifiedField modifiedField;
     private final Object oldData;
-    private  Object newData;
+    private Object newData;
 
     public PlayerModifiedEvent(FancyPlayer player, ModifiedField modifiedField, Object oldData, Object newData) {
         super(player);
@@ -21,6 +21,7 @@ public class PlayerModifiedEvent extends PlayerEvent {
 
     /**
      * Gets the field that was modified.
+     *
      * @return the modified field.
      */
     public ModifiedField getModifiedField() {
@@ -29,6 +30,7 @@ public class PlayerModifiedEvent extends PlayerEvent {
 
     /**
      * Gets the old data before modification.
+     *
      * @return the old data.
      */
     public Object getOldData() {
@@ -37,6 +39,7 @@ public class PlayerModifiedEvent extends PlayerEvent {
 
     /**
      * Gets the new data after modification.
+     *
      * @return the new data.
      */
     public Object getNewData() {
@@ -45,6 +48,7 @@ public class PlayerModifiedEvent extends PlayerEvent {
 
     /**
      * Sets the new data after modification.
+     *
      * @param newData the new data.
      */
     public void setNewData(FancyPlayer newData) {

@@ -10,7 +10,8 @@ public class PlayerFirstTimeJoinedPlaceholder implements PlaceholderProvider {
 
     public static final PlayerFirstTimeJoinedPlaceholder INSTANCE = new PlayerFirstTimeJoinedPlaceholder();
 
-    private PlayerFirstTimeJoinedPlaceholder() {}
+    private PlayerFirstTimeJoinedPlaceholder() {
+    }
 
     @Override
     public String getName() {
