@@ -1,6 +1,7 @@
 package com.fancyinnovations.fancycore.player;
 
 import com.fancyinnovations.fancycore.api.FancyCore;
+import com.fancyinnovations.fancycore.api.chat.ChatRoom;
 import com.fancyinnovations.fancycore.api.moderation.Punishment;
 import com.fancyinnovations.fancycore.api.moderation.PunishmentType;
 import com.fancyinnovations.fancycore.api.permissions.Group;
@@ -15,6 +16,7 @@ public class FancyPlayerImpl implements FancyPlayer {
     private final FancyPlayerData data;
     private FakeHytalePlayer player;
     private long joinedAt;
+    private ChatRoom currentChatRoom;
 
     public FancyPlayerImpl(FancyPlayerData data) {
         this.data = data;
@@ -123,5 +125,25 @@ public class FancyPlayerImpl implements FancyPlayer {
     @Override
     public void sendMessage(String message) {
         // TODO: Implement message sending logic
+    }
+
+    @Override
+    public ChatRoom getCurrentChatRoom() {
+        if (currentChatRoom == null) {
+            String defaultChatroomName = FancyCore.get().getConfig().getDefaultChatroom();
+            currentChatRoom = FancyCore.get().getChatService().getChatRoom(defaultChatroomName);
+            if (currentChatRoom == null) {
+                currentChatRoom = FancyCore.get().getChatService().createChatRoom(defaultChatroomName);
+            }
+
+            currentChatRoom.join(this);
+        }
+
+        return currentChatRoom;
+    }
+
+    @Override
+    public void switchChatRoom(ChatRoom room) {
+        this.currentChatRoom = room;
     }
 }

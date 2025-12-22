@@ -14,12 +14,16 @@ public class PlayerChatListener {
     public void onPlayerChat(PlayerChatEvent event) {
         // TODO: use real event and register listener properly
 
+        event.cancel();
+
         FancyPlayer fp = playerService.getByUUID(event.getPlayer().getUUID());
         Punishment punishment = fp.isMuted();
         if (punishment != null) {
-            event.cancel();
             fp.sendMessage("You are muted and cannot send messages."); //TODO: replace with translated message (include mute reason and duration)
+            return;
         }
+
+        fp.getCurrentChatRoom().sendMessage(fp, event.getMessage());
     }
 
     /**

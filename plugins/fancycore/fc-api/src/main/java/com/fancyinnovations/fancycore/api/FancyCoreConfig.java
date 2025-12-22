@@ -10,6 +10,10 @@ public interface FancyCoreConfig {
 
     String primaryCurrencyName();
 
+    String getChatFormat();
+
+    String getDefaultChatroom();
+
     void reload();
 
 }

@@ -1,5 +1,6 @@
 package com.fancyinnovations.fancycore.api.player;
 
+import com.fancyinnovations.fancycore.api.chat.ChatRoom;
 import com.fancyinnovations.fancycore.api.moderation.Punishment;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
@@ -76,4 +77,17 @@ public interface FancyPlayer {
      */
     void sendMessage(String message);
 
+    /**
+     * Gets the current chat room of the player.
+     *
+     * @return the current chat room.
+     */
+    ChatRoom getCurrentChatRoom();
+
+    /**
+     * Switches the player to a different chat room.
+     *
+     * @param room the chat room to switch to.
+     */
+    void switchChatRoom(ChatRoom room);
 }

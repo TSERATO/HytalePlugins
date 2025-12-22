@@ -1,5 +1,7 @@
 package com.fancyinnovations.fancycore.api;
 
+import com.fancyinnovations.fancycore.api.chat.ChatService;
+import com.fancyinnovations.fancycore.api.chat.ChatStorage;
 import com.fancyinnovations.fancycore.api.economy.CurrencyService;
 import com.fancyinnovations.fancycore.api.economy.CurrencyStorage;
 import com.fancyinnovations.fancycore.api.events.service.EventService;
@@ -50,6 +52,11 @@ public interface FancyCore {
     PermissionStorage getPermissionStorage();
 
     PermissionService getPermissionService();
+
+    @ApiStatus.Internal
+    ChatStorage getChatStorage();
+
+    ChatService getChatService();
 
 
     @ApiStatus.Internal

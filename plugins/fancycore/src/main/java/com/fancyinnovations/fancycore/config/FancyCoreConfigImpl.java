@@ -11,6 +11,8 @@ public class FancyCoreConfigImpl implements FancyCoreConfig {
     public static final String EVENT_DISCORD_WEBHOOK_URL_PATH = "settings.events.discord_webhook_url";
     public static final String EVENT_DISCORD_NOTIFICATIONS = "settings.events.notifications_enabled";
     public static final String PRIMARY_CURRENCY_NAME_PATH = "settings.economy.primary_currency";
+    public static final String CHAT_FORMAT_PATH = "settings.chat.format";
+    public static final String DEFAULT_CHATROOM_PATH = "settings.chat.default_chatroom";
 
     private static final String CONFIG_FILE_PATH = "plugins/FancyHolograms/config.yml";
     private ConfigJSON config;
@@ -53,6 +55,28 @@ public class FancyCoreConfigImpl implements FancyCoreConfig {
                 false,
                 String.class
         ));
+
+        config.addField(
+                new ConfigField<>(
+                        CHAT_FORMAT_PATH,
+                        "The default chat format for messages.",
+                        false,
+                        "<%player_nickname%> %message%",
+                        false,
+                        String.class
+                )
+        );
+
+        config.addField(
+                new ConfigField<>(
+                        DEFAULT_CHATROOM_PATH,
+                        "The name of the default chatroom players join upon connecting.",
+                        false,
+                        "global",
+                        false,
+                        String.class
+                )
+        );
     }
 
     @Override
@@ -78,5 +102,15 @@ public class FancyCoreConfigImpl implements FancyCoreConfig {
     @Override
     public String primaryCurrencyName() {
         return config.get(PRIMARY_CURRENCY_NAME_PATH);
+    }
+
+    @Override
+    public String getChatFormat() {
+        return config.get(CHAT_FORMAT_PATH);
+    }
+
+    @Override
+    public String getDefaultChatroom() {
+        return config.get(DEFAULT_CHATROOM_PATH);
     }
 }

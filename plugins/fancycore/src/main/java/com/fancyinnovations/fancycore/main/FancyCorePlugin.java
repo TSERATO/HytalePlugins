@@ -2,6 +2,8 @@ package com.fancyinnovations.fancycore.main;
 
 import com.fancyinnovations.fancycore.api.FancyCore;
 import com.fancyinnovations.fancycore.api.FancyCoreConfig;
+import com.fancyinnovations.fancycore.api.chat.ChatService;
+import com.fancyinnovations.fancycore.api.chat.ChatStorage;
 import com.fancyinnovations.fancycore.api.economy.CurrencyService;
 import com.fancyinnovations.fancycore.api.economy.CurrencyStorage;
 import com.fancyinnovations.fancycore.api.events.service.EventService;
@@ -12,6 +14,8 @@ import com.fancyinnovations.fancycore.api.permissions.PermissionStorage;
 import com.fancyinnovations.fancycore.api.placeholders.PlaceholderService;
 import com.fancyinnovations.fancycore.api.player.FancyPlayerService;
 import com.fancyinnovations.fancycore.api.player.FancyPlayerStorage;
+import com.fancyinnovations.fancycore.chat.service.ChatServiceImpl;
+import com.fancyinnovations.fancycore.chat.storage.json.ChatJsonStorage;
 import com.fancyinnovations.fancycore.config.FancyCoreConfigImpl;
 import com.fancyinnovations.fancycore.economy.service.CurrencyServiceImpl;
 import com.fancyinnovations.fancycore.economy.storage.json.CurrencyJsonStorage;
@@ -74,6 +78,9 @@ public class FancyCorePlugin implements FancyCore {
     private final PermissionStorage permissionStorage;
     private final PermissionService permissionService;
 
+    private final ChatStorage chatStorage;
+    private final ChatService chatService;
+
     public FancyCorePlugin() {
         INSTANCE = this;
         FancyCore.InstanceHolder.setInstance(INSTANCE);
@@ -127,6 +134,9 @@ public class FancyCorePlugin implements FancyCore {
 
         permissionStorage = new PermissionJsonStorage();
         permissionService = new PermissionServiceImpl();
+
+        chatStorage = new ChatJsonStorage();
+        chatService = new ChatServiceImpl();
     }
 
     public static FancyCorePlugin get() {
@@ -242,5 +252,15 @@ public class FancyCorePlugin implements FancyCore {
     @Override
     public PermissionService getPermissionService() {
         return permissionService;
+    }
+
+    @Override
+    public ChatStorage getChatStorage() {
+        return chatStorage;
+    }
+
+    @Override
+    public ChatService getChatService() {
+        return getChatService();
     }
 }
