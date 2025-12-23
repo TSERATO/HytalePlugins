@@ -12,14 +12,14 @@ public class PlayerChatListener {
     private final static FancyPlayerServiceImpl playerService = (FancyPlayerServiceImpl) FancyCorePlugin.get().getPlayerService();
 
     public void onPlayerChat(PlayerChatEvent event) {
-        // TODO: use real event and register listener properly
+        // TODO (HTEA): use real event and register listener properly
 
         event.cancel();
 
         FancyPlayer fp = playerService.getByUUID(event.getPlayer().getUUID());
         Punishment punishment = fp.isMuted();
         if (punishment != null) {
-            fp.sendMessage("You are muted and cannot send messages."); //TODO: replace with translated message (include mute reason and duration)
+            fp.sendMessage("You are muted and cannot send messages."); //TODO (I18N): replace with translated message (include mute reason and duration)
             return;
         }
 
@@ -28,6 +28,8 @@ public class PlayerChatListener {
 
     /**
      * Mock PlayerChatEvent for demonstration purposes.
+     * <p>
+     * TODO (HTEA): remove this when using real event
      */
     interface PlayerChatEvent {
         @NotNull FakeHytalePlayer getPlayer();

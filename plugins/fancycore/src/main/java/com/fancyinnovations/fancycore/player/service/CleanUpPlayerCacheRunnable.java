@@ -18,7 +18,6 @@ public class CleanUpPlayerCacheRunnable implements Runnable {
     @Override
     public void run() {
         for (FancyPlayer fp : service.getAllCached()) {
-            //TODO: uncomment once FancyPlayer#isOnline is implemented
             if (!fp.isOnline()) {
                 service.removePlayerFromCache(fp.getData().getUUID());
                 service.removeOnlinePlayer(fp);

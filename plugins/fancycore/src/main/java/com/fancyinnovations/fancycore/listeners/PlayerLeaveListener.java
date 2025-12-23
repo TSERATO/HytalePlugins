@@ -14,7 +14,7 @@ public class PlayerLeaveListener {
     private final static FancyPlayerServiceImpl playerService = (FancyPlayerServiceImpl) FancyCorePlugin.get().getPlayerService();
 
     public void onPlayerLeave(PlayerLeaveEvent event) {
-        // TODO: use real event and register listener properly
+        // TODO (HTEA): use real event and register listener properly
 
         FancyPlayerImpl fp = (FancyPlayerImpl) playerService.getByUUID(event.getPlayer().getUUID());
         fp.setPlayer(null);
@@ -33,6 +33,8 @@ public class PlayerLeaveListener {
 
     /**
      * Mock PlayerLeaveEvent for demonstration purposes.
+     * <p>
+     * TODO (HTEA): remove this when using real event
      */
     interface PlayerLeaveEvent {
         @NotNull FakeHytalePlayer getPlayer();

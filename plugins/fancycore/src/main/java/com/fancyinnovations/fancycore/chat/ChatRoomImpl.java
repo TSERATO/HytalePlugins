@@ -76,7 +76,7 @@ public class ChatRoomImpl implements ChatRoom {
     @Override
     public void sendMessage(FancyPlayer sender, String message) {
         if (muted && !sender.checkPermission("fancycore.chat.bypassmute")) {
-            sender.sendMessage("Chat is currently muted."); // TODO make message translatable
+            sender.sendMessage("Chat is currently muted."); // TODO (I18N): make message translatable
             return;
         }
 
@@ -84,7 +84,7 @@ public class ChatRoomImpl implements ChatRoom {
         long currentTime = System.currentTimeMillis();
         long remainingCooldown = cooldown - (currentTime - lastMessageTime);
         if (remainingCooldown > 0 && !sender.checkPermission("fancycore.chat.bypasscooldown")) {
-            sender.sendMessage("You must wait " + (remainingCooldown / 1000) + " seconds before sending another message."); // TODO make message translatable
+            sender.sendMessage("You must wait " + (remainingCooldown / 1000) + " seconds before sending another message."); // TODO (I18N): make message translatable
             return;
         }
 
@@ -120,7 +120,7 @@ public class ChatRoomImpl implements ChatRoom {
             broadcastMessage(""); // Sending empty messages to simulate clearing chat
         }
 
-        broadcastMessage("Chat has been cleared."); // TODO make message translatable
+        broadcastMessage("Chat has been cleared."); // TODO (I18N): make message translatable
     }
 
     @Override

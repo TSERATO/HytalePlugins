@@ -80,7 +80,7 @@ public abstract class FancyEvent {
      * @return a Message object for Discord, or null if not applicable
      */
     public Message getDiscordMessage() {
-        // TODO: make text translatable
+        // TODO (I18N): make text translatable
         return new Message(
                 "An event of type " + this.getClass().getSimpleName() + " was fired.",
                 List.of(

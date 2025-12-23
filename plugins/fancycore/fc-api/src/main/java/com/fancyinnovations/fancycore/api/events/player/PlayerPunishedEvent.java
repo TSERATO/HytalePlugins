@@ -30,7 +30,7 @@ public class PlayerPunishedEvent extends PlayerEvent {
 
     @Override
     public Message getDiscordMessage() {
-        // TODO: make text translatable
+        // TODO (I18N): make text translatable
 
         switch (punishment.type()) {
             case WARNING -> {

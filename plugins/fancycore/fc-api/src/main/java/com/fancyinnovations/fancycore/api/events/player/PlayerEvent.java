@@ -30,7 +30,7 @@ public abstract class PlayerEvent extends FancyEvent {
 
     @Override
     public Message getDiscordMessage() {
-        // TODO: make text translatable
+        // TODO (I18N): make text translatable
         return new Message(
                 "A player event of type " + this.getClass().getSimpleName() + " was fired.",
                 List.of(

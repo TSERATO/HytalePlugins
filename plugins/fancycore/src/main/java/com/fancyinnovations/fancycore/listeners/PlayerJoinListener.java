@@ -16,7 +16,7 @@ public class PlayerJoinListener {
     private final static FancyPlayerServiceImpl playerService = (FancyPlayerServiceImpl) FancyCorePlugin.get().getPlayerService();
 
     public void onPlayerJoin(PlayerJoinEvent event) {
-        // TODO: use real event and register listener properly
+        // TODO (HTEA): use real event and register listener properly
 
         boolean firstJoin = false;
 
@@ -32,7 +32,7 @@ public class PlayerJoinListener {
         Punishment punishment = fp.isBanned();
         if (punishment != null) {
             event.cancel();
-            event.getPlayer().kick("You are banned from this server."); //TODO: replace with translated message (include ban reason and duration)
+            event.getPlayer().kick("You are banned from this server."); //TODO (I18N): replace with translated message (include ban reason and duration)
             return;
         }
 
@@ -57,6 +57,8 @@ public class PlayerJoinListener {
 
     /**
      * Mock PlayerJoinEvent for demonstration purposes.
+     * <p>
+     * TODO (HTEA): remove this when using real event
      */
     interface PlayerJoinEvent {
         @NotNull FakeHytalePlayer getPlayer();

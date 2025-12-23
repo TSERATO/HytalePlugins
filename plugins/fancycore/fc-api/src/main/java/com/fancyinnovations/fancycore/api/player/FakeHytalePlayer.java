@@ -8,7 +8,7 @@ import java.util.UUID;
  */
 public interface FakeHytalePlayer {
 
-    // TODO: Replace with actual Hytale Player methods when available
+    // TODO (HTEA): Delete this once replaced with real player class
 
     UUID getUUID();
 
