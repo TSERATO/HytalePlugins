@@ -2,6 +2,7 @@ package com.fancyinnovations.fancycore.chat;
 
 import com.fancyinnovations.fancycore.api.FancyCore;
 import com.fancyinnovations.fancycore.api.chat.ChatRoom;
+import com.fancyinnovations.fancycore.api.events.chat.*;
 import com.fancyinnovations.fancycore.api.player.FancyPlayer;
 
 import java.util.*;
@@ -43,18 +44,32 @@ public class ChatRoomImpl implements ChatRoom {
 
     @Override
     public void startWatching(FancyPlayer player) {
+        if (!new PlayerWatchedChatRoomEvent(player, this).fire()) {
+            return;
+        }
+
         watchers.add(player);
     }
 
     @Override
     public void stopWatching(FancyPlayer player) {
+        if (!new PlayerUnwatchedChatRoomEvent(player, this).fire()) {
+            return;
+        }
+
         watchers.remove(player);
     }
 
     @Override
     public void broadcastMessage(String message) {
+        String parsedMessage = FancyCore.get().getPlaceholderService().parse(message);
+
+        if (!new BroadcastMessageSentEvent(this, message, parsedMessage).fire()) {
+            return;
+        }
+
         for (FancyPlayer participant : watchers) {
-            participant.sendMessage(message);
+            participant.sendMessage(parsedMessage);
         }
     }
 
@@ -76,6 +91,10 @@ public class ChatRoomImpl implements ChatRoom {
         String parsedMessage = FancyCore.get().getPlaceholderService().parse(sender, message);
         parsedMessage = parsedMessage.replace("%message%", message);
 
+        if (!new PlayerSentMessageEvent(sender, this, message, parsedMessage).fire()) {
+            return;
+        }
+
         broadcastMessage(parsedMessage);
 
         lastMessageTimestamps.put(sender.getData().getUUID(), currentTime);
@@ -93,6 +112,10 @@ public class ChatRoomImpl implements ChatRoom {
 
     @Override
     public void clearChat() {
+        if (!new ChatClearedEvent(this).fire()) {
+            return;
+        }
+
         for (int i = 0; i < 100; i++) {
             broadcastMessage(""); // Sending empty messages to simulate clearing chat
         }

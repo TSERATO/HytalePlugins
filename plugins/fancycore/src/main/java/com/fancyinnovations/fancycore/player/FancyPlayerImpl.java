@@ -2,6 +2,7 @@ package com.fancyinnovations.fancycore.player;
 
 import com.fancyinnovations.fancycore.api.FancyCore;
 import com.fancyinnovations.fancycore.api.chat.ChatRoom;
+import com.fancyinnovations.fancycore.api.events.chat.PlayerSwitchedChatRoomEvent;
 import com.fancyinnovations.fancycore.api.moderation.Punishment;
 import com.fancyinnovations.fancycore.api.moderation.PunishmentType;
 import com.fancyinnovations.fancycore.api.permissions.Group;
@@ -144,6 +145,14 @@ public class FancyPlayerImpl implements FancyPlayer {
 
     @Override
     public void switchChatRoom(ChatRoom room) {
+        if (room.getName().equals(this.currentChatRoom)) {
+            return;
+        }
+
+        if (!new PlayerSwitchedChatRoomEvent(this, this.currentChatRoom, room).fire()) {
+            return;
+        }
+
         this.currentChatRoom = room;
     }
 }
