@@ -40,7 +40,7 @@ dependencies {
 
 runHytale {
     // TODO (HTEA): Use real link
-    jarUrl = "https://fill-data.papermc.io/v1/objects/d5f47f6393aa647759f101f02231fa8200e5bccd36081a3ee8b6a5fd96739057/paper-1.21.10-115.jar"
+    jarUrl = "https://hytale.com/dl/env-prod/hytaleserver.jar"
 }
 
 tasks {
