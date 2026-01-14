@@ -1,5 +1,6 @@
 package com.fancyinnovations.fancycore.utils;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -7,9 +8,11 @@ public class TimeUtils {
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+    private static final DecimalFormat SECONDS_FORMAT = new DecimalFormat("#.##");
+
     public static String formatTime(long millis) {
-        long seconds = millis / 1000;
-        long minutes = seconds / 60;
+        double seconds = millis / 1000d;
+        long minutes = (long) (seconds / 60);
         long hours = minutes / 60;
         long days = hours / 24;
 
@@ -27,7 +30,7 @@ public class TimeUtils {
         if (minutes > 0 || hours > 0 || days > 0) {
             formattedTime.append(minutes).append("m ");
         }
-        formattedTime.append(seconds).append("s");
+        formattedTime.append(SECONDS_FORMAT.format(seconds)).append("s");
 
         return formattedTime.toString().trim();
     }

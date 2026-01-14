@@ -3,21 +3,24 @@ package com.fancyinnovations.fancycore.commands.chat.chatroom;
 import com.fancyinnovations.fancycore.api.chat.ChatRoom;
 import com.fancyinnovations.fancycore.api.player.FancyPlayer;
 import com.fancyinnovations.fancycore.api.player.FancyPlayerService;
+import com.fancyinnovations.fancycore.main.FancyCorePlugin;
 import com.fancyinnovations.fancycore.utils.TimeUtils;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.arguments.system.OptionalArg;
+import com.hypixel.hytale.server.core.command.system.arguments.system.RequiredArg;
+import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes;
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
+public class ChatRoomCooldownCMD extends CommandBase {
 
-public class ChatRoomInfoCMD extends CommandBase {
-
+    protected final RequiredArg<Float> cooldownArg = this.withRequiredArg("cooldown", "The cooldown in seconds", ArgTypes.FLOAT);
     protected final OptionalArg<ChatRoom> chatRoomNameArg = this.withOptionalArg(ChatRoomArg.NAME, ChatRoomArg.DESCRIPTION, ChatRoomArg.TYPE);
 
-    protected ChatRoomInfoCMD() {
-        super("info", "Get information about a chat room");
+    protected ChatRoomCooldownCMD() {
+        super("cooldown", "Set the chat cooldown for a chat room");
+        requirePermission("fancycore.commands.chatroom.cooldown");
     }
 
     @Override
@@ -33,16 +36,18 @@ public class ChatRoomInfoCMD extends CommandBase {
             return;
         }
 
+        // TODO: Permission check
+//        if (!fp.checkPermission("fancycore.commands.chatroom.cooldown")) {
+//            ctx.sendMessage(Message.raw("You do not have permission to change the cooldown."));
+//            return;
+//        }
+
         ChatRoom chatRoom = chatRoomNameArg.provided(ctx) ? chatRoomNameArg.get(ctx) : fp.getCurrentChatRoom();
 
-        List<String> nicknames = chatRoom.getWatchers().stream()
-                .map(fancyPlayer -> fancyPlayer.getData().getNickname())
-                .toList();
+        long cooldownMs = (long) (cooldownArg.get(ctx) * 1000);
+        chatRoom.setCooldown(cooldownMs);
+        FancyCorePlugin.get().getChatStorage().setChatRoom(chatRoom);
 
-        ctx.sendMessage(Message.raw("Chat Room Info:"));
-        ctx.sendMessage(Message.raw("- Name: " + chatRoom.getName()));
-        ctx.sendMessage(Message.raw("- IsMuted: " + chatRoom.isMuted()));
-        ctx.sendMessage(Message.raw("- Cooldown: " + TimeUtils.formatTime(chatRoom.getCooldown())));
-        ctx.sendMessage(Message.raw("- Watchers: " + chatRoom.getWatchers().size() + " (" + String.join(", ", nicknames) + ")"));
+        ctx.sendMessage(Message.raw("Set cooldown of chat room " + chatRoom.getName() + " to " + TimeUtils.formatTime(cooldownMs)));
     }
 }

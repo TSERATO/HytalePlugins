@@ -1,0 +1,41 @@
+package com.fancyinnovations.fancycore.commands.chat.chatroom;
+
+import com.fancyinnovations.fancycore.api.chat.ChatRoom;
+import com.fancyinnovations.fancycore.api.chat.ChatService;
+import com.fancyinnovations.fancycore.api.player.FancyPlayer;
+import com.fancyinnovations.fancycore.api.player.FancyPlayerService;
+import com.hypixel.hytale.server.core.Message;
+import com.hypixel.hytale.server.core.command.system.CommandContext;
+import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase;
+import org.jetbrains.annotations.NotNull;
+
+public class ChatRoomListCMD extends CommandBase {
+
+    protected ChatRoomListCMD() {
+        super("list", "List all chat rooms you have permission to access");
+    }
+
+    @Override
+    protected void executeSync(@NotNull CommandContext ctx) {
+        if (!ctx.isPlayer()) {
+            ctx.sendMessage(Message.raw("This command can only be executed by a player."));
+            return;
+        }
+
+        FancyPlayer fp = FancyPlayerService.get().getByUUID(ctx.sender().getUuid());
+        if (fp == null) {
+            ctx.sendMessage(Message.raw("FancyPlayer not found."));
+            return;
+        }
+
+        ctx.sendMessage(Message.raw("Chat Rooms: "));
+        for (ChatRoom cr : ChatService.get().getAllChatRooms()) {
+            // TODO: Permission check
+//            if (!fp.checkPermission("fancycore.chatroom."+cr.getName())) {
+//                continue;
+//            }
+
+            ctx.sendMessage(Message.raw("- " + cr.getName() + " (" + cr.getWatchers().size() + " watchers)"));
+        }
+    }
+}

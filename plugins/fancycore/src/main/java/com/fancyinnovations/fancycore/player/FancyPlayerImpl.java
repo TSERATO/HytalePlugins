@@ -150,7 +150,7 @@ public class FancyPlayerImpl implements FancyPlayer {
 
     @Override
     public void switchChatRoom(ChatRoom room) {
-        if (room.getName().equals(this.currentChatRoom)) {
+        if (room.getName().equals(this.currentChatRoom.getName())) {
             return;
         }
 

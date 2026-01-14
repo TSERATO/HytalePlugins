@@ -5,6 +5,7 @@ import com.fancyinnovations.fancycore.api.chat.ChatRoom;
 import com.fancyinnovations.fancycore.api.events.chat.*;
 import com.fancyinnovations.fancycore.api.player.FancyPlayer;
 import com.fancyinnovations.fancycore.main.FancyCorePlugin;
+import com.fancyinnovations.fancycore.utils.TimeUtils;
 import de.oliver.fancyanalytics.logger.properties.StringProperty;
 
 import java.util.*;
@@ -86,12 +87,13 @@ public class ChatRoomImpl implements ChatRoom {
         long currentTime = System.currentTimeMillis();
         long remainingCooldown = cooldown - (currentTime - lastMessageTime);
         if (remainingCooldown > 0 && !sender.checkPermission("fancycore.chat.bypasscooldown")) {
-            sender.sendMessage("You must wait " + (remainingCooldown / 1000) + " seconds before sending another message."); // TODO (I18N): make message translatable
+            sender.sendMessage("You must wait " + TimeUtils.formatTime(remainingCooldown) + " before sending another message."); // TODO (I18N): make message translatable
             return;
         }
 
         String parsedMessage = FancyCorePlugin.get().getConfig().getChatFormat()
-                .replace("%message%", message);
+                .replace("%message%", message)
+                .replace("%chat_room%", name);
         parsedMessage = FancyCore.get().getPlaceholderService().parse(sender, parsedMessage);
 
         FancyCorePlugin.get().getFancyLogger().info(
@@ -126,7 +128,7 @@ public class ChatRoomImpl implements ChatRoom {
             return;
         }
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 300; i++) {
             broadcastMessage(""); // Sending empty messages to simulate clearing chat
         }
 

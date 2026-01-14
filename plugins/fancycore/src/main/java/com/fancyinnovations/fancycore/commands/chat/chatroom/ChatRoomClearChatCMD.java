@@ -3,21 +3,20 @@ package com.fancyinnovations.fancycore.commands.chat.chatroom;
 import com.fancyinnovations.fancycore.api.chat.ChatRoom;
 import com.fancyinnovations.fancycore.api.player.FancyPlayer;
 import com.fancyinnovations.fancycore.api.player.FancyPlayerService;
-import com.fancyinnovations.fancycore.utils.TimeUtils;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.arguments.system.OptionalArg;
 import com.hypixel.hytale.server.core.command.system.basecommands.CommandBase;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
-public class ChatRoomInfoCMD extends CommandBase {
+public class ChatRoomClearChatCMD extends CommandBase {
 
     protected final OptionalArg<ChatRoom> chatRoomNameArg = this.withOptionalArg(ChatRoomArg.NAME, ChatRoomArg.DESCRIPTION, ChatRoomArg.TYPE);
 
-    protected ChatRoomInfoCMD() {
-        super("info", "Get information about a chat room");
+    protected ChatRoomClearChatCMD() {
+        super("clearchat", "Clear the chat of a chat room");
+        addAliases("cc", "clear");
+        requirePermission("fancycore.commands.chatroom.clearchat");
     }
 
     @Override
@@ -33,16 +32,16 @@ public class ChatRoomInfoCMD extends CommandBase {
             return;
         }
 
+        // TODO: Permission check
+//        if (!fp.checkPermission("fancycore.commands.chatroom.clearchat")) {
+//            ctx.sendMessage(Message.raw("You do not have permission to clear chat."));
+//            return;
+//        }
+
         ChatRoom chatRoom = chatRoomNameArg.provided(ctx) ? chatRoomNameArg.get(ctx) : fp.getCurrentChatRoom();
 
-        List<String> nicknames = chatRoom.getWatchers().stream()
-                .map(fancyPlayer -> fancyPlayer.getData().getNickname())
-                .toList();
+        chatRoom.clearChat();
 
-        ctx.sendMessage(Message.raw("Chat Room Info:"));
-        ctx.sendMessage(Message.raw("- Name: " + chatRoom.getName()));
-        ctx.sendMessage(Message.raw("- IsMuted: " + chatRoom.isMuted()));
-        ctx.sendMessage(Message.raw("- Cooldown: " + TimeUtils.formatTime(chatRoom.getCooldown())));
-        ctx.sendMessage(Message.raw("- Watchers: " + chatRoom.getWatchers().size() + " (" + String.join(", ", nicknames) + ")"));
+        ctx.sendMessage(Message.raw("Chat for chat room " + chatRoom.getName() + " has been cleared."));
     }
 }

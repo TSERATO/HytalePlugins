@@ -5,6 +5,7 @@ import com.fancyinnovations.fancycore.api.chat.ChatService;
 import com.fancyinnovations.fancycore.api.chat.ChatStorage;
 import com.fancyinnovations.fancycore.chat.ChatRoomImpl;
 import com.fancyinnovations.fancycore.chat.storage.fake.ChatFakeStorage;
+import com.fancyinnovations.fancycore.chat.storage.json.ChatJsonStorage;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class ChatServiceImpl implements ChatService {
     private final ChatStorage cache;
 
     public ChatServiceImpl() {
-        this.storage = new ChatFakeStorage();
+        this.storage = new ChatJsonStorage();
         this.cache = new ChatFakeStorage();
         load();
     }

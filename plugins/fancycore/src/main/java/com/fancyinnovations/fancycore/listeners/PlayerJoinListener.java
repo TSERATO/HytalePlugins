@@ -30,6 +30,8 @@ public class PlayerJoinListener {
         }
         fp.setPlayer(event.getPlayerRef());
 
+        fp.getCurrentChatRoom(); // Ensure default chat room is set
+
         Punishment punishment = fp.isBanned();
         if (punishment != null) {
             event.getPlayerRef().getPacketHandler().disconnect("You are banned from this server."); //TODO (I18N): replace with translated message (include ban reason and duration)
