@@ -1,6 +1,7 @@
 package com.fancyinnovations.fancycore.listeners;
 
 import com.fancyinnovations.fancycore.api.FancyCore;
+import com.fancyinnovations.fancycore.api.events.player.PlayerLeftEvent;
 import com.fancyinnovations.fancycore.api.placeholders.PlaceholderService;
 import com.fancyinnovations.fancycore.api.player.FancyPlayer;
 import com.fancyinnovations.fancycore.main.FancyCorePlugin;
@@ -29,5 +30,7 @@ public class PlayerLeaveListener {
         for (FancyPlayer onlinePlayer : playerService.getOnlinePlayers()) {
             onlinePlayer.sendMessage(leaveMsg);
         }
+
+        new PlayerLeftEvent(fp).fire();
     }
 }

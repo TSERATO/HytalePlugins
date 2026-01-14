@@ -1,6 +1,7 @@
 package com.fancyinnovations.fancycore.listeners;
 
 import com.fancyinnovations.fancycore.api.FancyCore;
+import com.fancyinnovations.fancycore.api.events.player.PlayerJoinedEvent;
 import com.fancyinnovations.fancycore.api.moderation.Punishment;
 import com.fancyinnovations.fancycore.api.placeholders.PlaceholderService;
 import com.fancyinnovations.fancycore.api.player.FancyPlayer;
@@ -56,6 +57,8 @@ public class PlayerJoinListener {
         }
 
         playerService.addOnlinePlayer(fp);
+
+        new PlayerJoinedEvent(fp, firstJoin).fire();
     }
 
     public static void onPlayerReady(PlayerReadyEvent event) {
