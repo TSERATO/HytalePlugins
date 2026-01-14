@@ -34,11 +34,11 @@ public class UpdatePluginCMD extends AbstractCommand {
     }
 
     @Override
-    protected @Nullable CompletableFuture<Void> execute(@NotNull CommandContext commandContext) {
+    protected @Nullable CompletableFuture<Void> execute(@NotNull CommandContext ctx) {
         FetchedVersion latestVersion = this.versionChecker.check();
         if (latestVersion == null) {
             // TODO (I18N): make translatable
-            commandContext.sender().sendMessage(
+            ctx.sender().sendMessage(
                     Message.raw("You are already using the latest version of FancyCore.")
             );
             logger.info("FancyCore is already up to date.");
@@ -46,7 +46,7 @@ public class UpdatePluginCMD extends AbstractCommand {
         }
 
         // TODO (I18N): make translatable
-        commandContext.sender().sendMessage(
+        ctx.sender().sendMessage(
                 Message.raw("A new version of FancyCore is available: " + latestVersion.name() + ". It will be downloaded now. Please restart the server after the download is complete.")
         );
         logger.info(
@@ -57,7 +57,7 @@ public class UpdatePluginCMD extends AbstractCommand {
         );
 
         // TODO (I18N): make translatable
-        commandContext.sender().sendMessage(
+        ctx.sender().sendMessage(
                 Message.raw("Downloading FancyCore version " + latestVersion.name() + "...")
         );
         logger.info(
@@ -81,7 +81,7 @@ public class UpdatePluginCMD extends AbstractCommand {
             HttpResponse<byte[]> resp = req.send();
             Files.write(Path.of("mods/FancyCore.jar"), resp.body());
 
-            commandContext.sender().sendMessage(
+            ctx.sender().sendMessage(
                     Message.raw("Successfully downloaded FancyCore version " + latestVersion.name() + ". Please restart the server to apply the update.")
             );
             logger.info(
@@ -92,7 +92,7 @@ public class UpdatePluginCMD extends AbstractCommand {
             );
 
         } catch (URISyntaxException | IOException | InterruptedException e) {
-            commandContext.sender().sendMessage(
+            ctx.sender().sendMessage(
                     Message.raw("Failed to download the latest version of FancyCore. Please check the logs for more information.")
             );
             logger.error(
