@@ -8,6 +8,7 @@
   "Dependencies": {
     "Hytale:I18nModule": "*"
   },
+  "IncludesAssetPack": true,
   "Authors": [
     {
       "Name": "Oliver Schlueter",

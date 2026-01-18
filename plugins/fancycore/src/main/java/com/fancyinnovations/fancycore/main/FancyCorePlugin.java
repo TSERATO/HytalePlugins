@@ -25,6 +25,7 @@ import com.fancyinnovations.fancycore.commands.teleport.TeleportCMD;
 import com.fancyinnovations.fancycore.commands.teleport.TeleportHereCMD;
 import com.fancyinnovations.fancycore.commands.teleport.TeleportAllCMD;
 import com.fancyinnovations.fancycore.commands.teleport.TeleportPosCMD;
+import com.fancyinnovations.fancycore.commands.test.TestGuiCMD;
 import com.fancyinnovations.fancycore.config.FancyCoreConfigImpl;
 import com.fancyinnovations.fancycore.economy.service.CurrencyServiceImpl;
 import com.fancyinnovations.fancycore.economy.storage.json.CurrencyJsonStorage;
@@ -246,6 +247,9 @@ public class FancyCorePlugin extends JavaPlugin implements FancyCore {
         CommandManager.get().register(new TeleportHereCMD());
         CommandManager.get().register(new TeleportAllCMD());
         CommandManager.get().register(new TeleportPosCMD());
+
+        // test
+        CommandManager.get().register(new TestGuiCMD());
     }
 
     public void registerListeners() {
