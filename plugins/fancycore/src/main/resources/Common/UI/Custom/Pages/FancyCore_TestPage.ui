@@ -1,0 +1,56 @@
+$C = "../Common.ui";
+
+$C.@PageOverlay {
+  $C.@Container {
+    Anchor: (Width: 600, Height: 500);
+
+    #Title {
+      Group {
+        $C.@Title {
+          @Text = "Test UI";
+        }
+      }
+    }
+
+    #Content {
+      LayoutMode: Top;
+      Padding: (Top: 20, Left: 20, Right: 20);
+
+      Label {
+        Text: "Test UI - Dynamic List";
+        Style: (
+          FontSize: 20,
+          TextColor: #ffffff
+        );
+      }
+
+      Label #CounterLabel {
+        Text: "Counter: 0";
+        Style: (
+          FontSize: 16,
+          TextColor: #93844c
+        );
+        Padding: (Top: 10);
+      }
+
+      $C.@TextButton #IncrementButton {
+        @Text = "Add Item";
+        Anchor: (Top: 10, Height: 40);
+      }
+
+      Group #ItemList {
+        Anchor: (Top: 10);
+        FlexWeight: 1;
+        LayoutMode: TopScrolling;
+        ScrollbarStyle: $C.@DefaultScrollbarStyle;
+        Padding: (Left: 4);
+
+        Group #ItemCards {
+          LayoutMode: Top;
+        }
+      }
+    }
+  }
+}
+
+$C.@BackButton {}
